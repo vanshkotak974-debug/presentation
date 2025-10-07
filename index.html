@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Transitions - JG University</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --secondary: #3a0ca3;
+      --accent: #7209b7;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #4cc9f0;
+      --warning: #f72585;
+      --code-bg: #2d2d2d;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --university-color: #1a4b8c;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: white;
+      color: var(--dark);
+    }
+    
+    .container {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .slides-container {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+    }
+    
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      background: white;
+    }
+    
+    /* University Logo */
+    .university-logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+    }
+    
+    .university-logo img {
+      height: 70px;
+      width: auto;
+    }
+    
+    .slide-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    
+    .info-section {
+      padding-right: 20px;
+    }
+    
+    .example-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .slide-number {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: var(--primary);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+    
+    h1 {
+      color: var(--secondary);
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    h1:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    
+    ul {
+      list-style-type: none;
+      margin-bottom: 30px;
+    }
+    
+    li {
+      margin-bottom: 12px;
+      padding-left: 30px;
+      position: relative;
+      line-height: 1.6;
+    }
+    
+    li:before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+    
+    .code-container {
+      background: var(--code-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      width: 100%;
+    }
+    
+    .code-header {
+      background: #1e1e1e;
+      color: #ccc;
+      padding: 10px 15px;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    pre {
+      padding: 20px;
+      margin: 0;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    
+    code {
+      color: #f8f8f2;
+      font-family: 'Fira Code', monospace;
+    }
+    
+    .example-box {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 200px;
+      border: 1px solid #eaeaea;
+    }
+    
+    .example-caption {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+    }
+    
+    /* Front Page Styling */
+    .front-page {
+      background: white;
+      color: var(--dark);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .topic-title {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    
+    .topic-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 60px;
+      color: #666;
+    }
+    
+    .members-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+    
+    .member-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px 30px;
+      min-width: 150px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+      border: 1px solid #eaeaea;
+    }
+    
+    .member-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .member-role {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    
+    .member-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .guide-section {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 1px solid #eaeaea;
+    }
+    
+    .guide-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    /* Navigation */
+    .nav-container {
+      position: fixed;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      z-index: 100;
+    }
+    
+    .nav-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-btn:hover {
+      background: var(--secondary);
+      transform: translateY(-3px);
+    }
+    
+    .nav-btn:active {
+      transform: translateY(1px);
+    }
+    
+    .nav-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .progress-container {
+      width: 300px;
+      height: 6px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: var(--primary);
+      width: 12.5%;
+      transition: width 0.3s ease;
+    }
+    
+    /* Slide-specific styles */
+    .slide1 button {
+      background: var(--success);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 1s ease;
+      box-shadow: var(--shadow);
+    }
+    
+    .slide1 button:hover {
+      background: var(--warning);
+    }
+    
+    .slide2 a {
+      color: var(--dark);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.5s ease;
+      font-size: 1.1rem;
+    }
+    
+    .slide2 a:hover {
+      color: var(--warning);
+    }
+    
+    .slide3 .box, .slide4 .box, .slide5 .box, .slide6 .box, .slide8 .box1, .slide8 .box2 {
+      width: 100px;
+      height: 100px;
+      background: var(--success);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    
+    .slide3 .box {
+      transition: width 2s ease-in-out 0.5s;
+    }
+    
+    .slide3 .box:hover {
+      width: 200px;
+    }
+    
+    .slide4 .box {
+      background: #ff9eaa;
+      transition-property: background;
+      transition-duration: 1s;
+      transition-timing-function: ease;
+      transition-delay: 0.3s;
+    }
+    
+    .slide4 .box:hover {
+      background: var(--warning);
+    }
+    
+    .slide5 .box {
+      background: #4cc9f0;
+      transition: width 2s ease-in-out;
+    }
+    
+    .slide5 .box:hover {
+      width: 200px;
+    }
+    
+    .slide6 .box {
+      background: #52b788;
+      transition: width 1s, height 1s, background 1s, transform 1s;
+    }
+    
+    .slide6 .box:hover {
+      width: 150px;
+      height: 150px;
+      background: #2a9d8f;
+      transform: rotate(10deg);
+    }
+    
+    .slide7 button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.5s, transform 0.3s, box-shadow 0.3s;
+      box-shadow: var(--shadow);
+    }
+    
+    .slide7 button:hover {
+      background: var(--secondary);
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+    
+    .slide8 .box1 {
+      background: #ff9e6d;
+      transition: background 1s, transform 0.5s;
+    }
+    
+    .slide8 .box1:hover { 
+      background: var(--warning); 
+      transform: scale(1.05);
+    }
+    
+    @keyframes colorChange {
+      from { background: #ff9e6d; }
+      to { background: var(--warning); }
+    }
+    
+    .slide8 .box2 {
+      animation: colorChange 2s infinite alternate;
+    }
+    
+    /* Fullscreen mode */
+    .fullscreen-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+    
+    .fullscreen-btn:hover {
+      background: white;
+      transform: scale(1.1);
+    }
+    
+    /* PPT-like styling */
+    .ppt-slide {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      margin: 0 auto;
+      max-width: 90%;
+      height: 85%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .front-page .ppt-slide {
+      background: transparent;
+      box-shadow: none;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 968px) {
+      .slide-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .info-section {
+        padding-right: 0;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .topic-title {
+        font-size: 2.5rem;
+      }
+      
+      .members-container {
+        gap: 20px;
+      }
+      
+      .university-logo img {
+        height: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="fullscreen-btn" id="fullscreen-btn" title="Toggle Fullscreen">
+    <i class="fas fa-expand"></i>
+  </button>
+  
+  <div class="container">
+    <div class="slides-container">
+      <!-- FRONT PAGE -->
+      <section class="slide front-page">
+        <div class="university-logo">
+          <img src="https://eequeuestorage.blob.core.windows.net/staticfiles/jguni2/ee-form-widget/form-1/loginlogo.png" alt="JG University Logo">
+        </div>
+        
+        <div class="ppt-slide">
+          <h1 class="topic-title">CSS: Transition</h1>
+          <p class="topic-subtitle">Creating Smooth Web Interactions</p>
+          
+          <div class="members-container">
+            <div class="member-card">
+              <div class="member-role">Team Member</div>
+              <div class="member-name">Vansh</div>
+            </div>
+            <div class="member-card">
+              <div class="member-role">Team Member</div>
+              <div class="member-name">Ayushi</div>
+            </div>
+            <div class="member-card">
+              <div class="member-role">Team Member</div>
+              <div class="member-name">Devam</div>
+            </div>
+            <div class="member-card">
+              <div class="member-role">Team Member</div>
+              <div class="member-name">Yuvraj</div>
+            </div>
+          </div>
+          
+          <div class="guide-section">
+            <div class="member-role">Guided by</div>
+            <div class="guide-name">Saurabh Sir</div>
+          </div>
+        </div>
+        
+        <div class="slide-number">1</div>
+      </section>
+
+      <!-- SLIDE 1 -->
+      <section class="slide slide1">
+        <div class="university-logo">
+          <img src="https://eequeuestorage.blob.core.windows.net/staticfiles/jguni2/ee-form-widget/form-1/loginlogo.png" alt="JG University Logo">
+        </div>
+        
+        <div class="slide-number">2</div>
+        <div class="ppt-slide">
+          <div class="slide-content">
+            <div class="info-section">
+              <h1><i class="fas fa-play-circle"></i> Introduction to CSS Transitions</h1>
+              <ul>
+                <li>CSS Transitions allow smooth changes between property values over a specified duration</li>
+                <li>They enhance user experience by making interactions feel natural and polished</li>
+                <li>Transitions are triggered by state changes like hover, focus, or active states</li>
+                <li>Only animatable properties can be transitioned (color, size, position, opacity, etc.)</li>
+                <li>No JavaScript required — pure CSS solution for simple animations</li>
+              </ul>
+              <div class="code-container">
+                <div class="code-header">
+                  <span>CSS Code</span>
+                  <i class="far fa-copy"></i>
+                </div>
+                <pre><code>button {
+  background: #4cc9f0;
+  transition: background 1s;
+}
+
+button:hover {
+  background: #f72585;
+}</code></pre>
+              </div>
+            </div>
+            <div class="example-section">
+              <div class="example-box">
+                <button>Hover Me</button>
+              </div>
+              <p class="example-caption">Hover over the button to see the transition effect</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2 -->
+      <section class="slide slide2">
+        <div class="university-logo">
+          <img src="https://eequeuestorage.blob.core.windows.net/staticfiles/jguni2/ee-form-widget/form-1/loginlogo.png" alt="JG University Logo">
+        </div>
+        
+        <div class="slide-number">3</div>
+        <div class="ppt-slide">
+          <div class="slide-content">
+            <div class="info-section">
+              <h1><i class="fas fa-cogs"></i> Why Use CSS Transitions?</h1>
+              <ul>
+                <li>Create smooth visual changes instead of abrupt jumps between states</li>
+                <li>Improve user experience by providing visual feedback for interactions</li>
+                <li>Guide user attention to important elements and interactions</li>
+                <li>Add polish and professionalism to your website with minimal code</li>
+                <li>Performance optimized - browsers can hardware accelerate transitions</li>
+              </ul>
+              <div class="code-container">
+                <div class="code-header">
+                  <span>CSS Code</span>
+                  <i class="far fa-copy"></i>
+                </div>
+                <pre><code>a {
+  color: #212529;
+  transition: color 0.5s;
+}
+
+a:hover {
+  color: #f72585;
+}</code></pre>
+              </div>
+            </div>
+            <div class="example-section">
+              <div class="example-box">
+                <a href="#">Hover over this link</a>
+              </div>
+              <p class="example-caption">Notice the smooth color change on hover</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3 -->
+      <section class="slide slide3">
+        <div class="university-logo">
+          <img src="https://eequeuestorage.blob.core.windows.net/staticfiles/jguni2/ee-form-widget/form-1/loginlogo.png" alt="JG University Logo">
+        </div>
+        
+        <div class="slide-number">4</div>
+        <div class="ppt-slide">
+          <div class="slide-content">
+            <div class="info-section">
+              <h1><i class="fas fa-code"></i> CSS Transition Syntax</h1>
+              <ul>
+                <li><strong>Format:</strong> transition: property duration timing-function delay;</li>
+                <li><strong>property:</strong> The CSS property to animate (or 'all' for all properties)</li>
+                <li><strong>duration:</strong> How long the transition takes (in seconds or milliseconds)</li>
+                <li><strong>timing-function:</strong> How the intermediate values are calculated</li>
+                <li><strong>delay:</strong> How long to wait before starting the transition</li>
+              </ul>
+              <div class="code-container">
+                <div class="code-header">
+                  <span>CSS Code</span>
+                  <i class="far fa-copy"></i>
+                </div>
+                <pre><code>div {
+  width: 100px;
+  transition: width 2s ease-in-out 0.5s;
+}
+
+div:hover {
+  width: 200px;
+}</code></pre>
+              </div>
+            </div>
+            <div class="example-section">
+              <div class="example-box">
+                <div class="box"></div>
+              </div>
+              <p class="example-caption">Hover to see the delayed width transition</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4 -->
+      <section class="slide slide4">
+        <div class="university-logo">
+          <img src="https://eequeuestorage.blob.core.windows.net/staticfiles/jguni2/ee-form-widget/form-1/loginlogo.png" alt="JG University Logo">
+        </div>
+        
+        <div class="slide-number">5</div>
+        <div class="ppt-slide">
+          <div class="slide-content">
+            <div class="info-section">
+              <h1><i class="fas fa-sliders-h"></i> Individual Transition Properties</h1>
+              <ul>
+                <li>Instead of shorthand, you can use individual transition properties</li>
+                <li><strong>transition-property:</strong> Specifies which properties to transition</li>
+                <li><strong>transition-duration:</strong> Defines how long the transition lasts</li>
+                <li><strong>transition-timing-function:</strong> Controls the acceleration curve</li>
+                <li><strong>transition-delay:</strong> Specifies when the transition will start</li>
+              </ul>
+              <div class="code-container">
+                <div class="code-header">
+                  <span>CSS Code</span>
+                  <i class="far fa-copy"></i>
+                </div>
+                <pre><code>.box {
+  background: #ff9eaa;
+  transition-property: background;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+  transition-delay: 0.3s;
+}
+
+.box:hover {
+  background: #f72585;
+}</code></pre>
+              </div>
+            </div>
+            <div class="example-section">
+              <div class="example-box">
+                <div class="box"></div>
+              </div>
+              <p class="example-caption">Hover to see the delayed background transition</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5 -->
+      <section class="slide slide5">
+        <div class="university-logo">
+          <img src="https://eequeuestorage.blob.core.windows.net/staticfiles/jguni2/ee-form-widget/form-1/loginlogo.png" alt="JG University Logo">
+        </div>
+        
+        <div class="slide-number">6</div>
+        <div class="ppt-slide">
+          <div class="slide-content">
+            <div class="info-section">
+              <h1><i class="fas fa-wave-square"></i> Timing Functions</h1>
+              <ul>
+                <li>Timing functions control the acceleration pattern of transitions</li>
+                <li><strong>linear:</strong> Constant speed throughout the transition</li>
+                <li><strong>ease:</strong> Slow start, fast middle, slow end (default)</li>
+                <li><strong>ease-in:</strong> Slow start, fast finish</li>
+                <li><strong>ease-out:</strong> Fast start, slow finish</li>
+                <li><strong>ease-in-out:</strong> Slow at both beginning and end</li>
+              </ul>
+              <div class="code-container">
+                <div class="code-header">
+                  <span>CSS Code</span>
+                  <i class="far fa-copy"></i>
+                </div>
+                <pre><code>.box {
+  width: 100px;
+  transition: width 2s ease-in-out;
+}
+
+.box:hover {
+  width: 200px;
+}</code></pre>
+              </div>
+            </div>
+            <div class="example-section">
+              <div class="example-box">
+                <div class="box"></div>
+              </div>
+              <p class="example-caption">Hover to see the ease-in-out timing function</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6 -->
+      <section class="slide slide6">
+        <div class="university-logo">
+          <img src="https://eequeuestorage.blob.core.windows.net/staticfiles/jguni2/ee-form-widget/form-1/loginlogo.png" alt="JG University Logo">
+        </div>
+        
+        <div class="slide-number">7</div>
+        <div class="ppt-slide">
+          <div class="slide-content">
+            <div class="info-section">
+              <h1><i class="fas fa-layer-group"></i> Multiple Property Transitions</h1>
+              <ul>
+                <li>You can transition multiple properties simultaneously</li>
+                <li>Separate each property with a comma in the transition declaration</li>
+                <li>Each property can have its own duration, timing function, and delay</li>
+                <li>Use <strong>transition: all</strong> to transition all changing properties</li>
+                <li>Be careful with "all" as it can impact performance with many properties</li>
+              </ul>
+              <div class="code-container">
+                <div class="code-header">
+                  <span>CSS Code</span>
+                  <i class="far fa-copy"></i>
+                </div>
+                <pre><code>div {
+  width: 100px;
+  height: 100px;
+  background: #52b788;
+  transition: width 1s, height 1s, 
+              background 1s, transform 1s;
+}
+
+div:hover {
+  width: 150px;
+  height: 150px;
+  background: #2a9d8f;
+  transform: rotate(10deg);
+}</code></pre>
+              </div>
+            </div>
+            <div class="example-section">
+              <div class="example-box">
+                <div class="box"></div>
+              </div>
+              <p class="example-caption">Hover to see multiple properties transitioning</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7 -->
+      <section class="slide slide7">
+        <div class="university-logo">
+          <img src="https://eequeuestorage.blob.core.windows.net/staticfiles/jguni2/ee-form-widget/form-1/loginlogo.png" alt="JG University Logo">
+        </div>
+        
+        <div class="slide-number">8</div>
+        <div class="ppt-slide">
+          <div class="slide-content">
+            <div class="info-section">
+              <h1><i class="fas fa-mouse-pointer"></i> Practical Examples</h1>
+              <ul>
+                <li>Button hover effects for better user interaction feedback</li>
+                <li>Navigation menus with smooth expanding/collapsing</li>
+                <li>Image galleries with fade or slide transitions</li>
+                <li>Form elements with focus states for better accessibility</li>
+                <li>Card components with elevation changes on hover</li>
+              </ul>
+              <div class="code-container">
+                <div class="code-header">
+                  <span>CSS Code</span>
+                  <i class="far fa-copy"></i>
+                </div>
+                <pre><code>button {
+  background: #4361ee;
+  color: white;
+  transition: background 0.5s, 
+              transform 0.3s, 
+              box-shadow 0.3s;
+}
+
+button:hover {
+  background: #3a0ca3;
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}</code></pre>
+              </div>
+            </div>
+            <div class="example-section">
+              <div class="example-box">
+                <button>Hover Me</button>
+              </div>
+              <p class="example-caption">Hover to see the multi-property button effect</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8 -->
+      <section class="slide slide8">
+        <div class="university-logo">
+          <img src="https://eequeuestorage.blob.core.windows.net/staticfiles/jguni2/ee-form-widget/form-1/loginlogo.png" alt="JG University Logo">
+        </div>
+        
+        <div class="slide-number">9</div>
+        <div class="ppt-slide">
+          <div class="slide-content">
+            <div class="info-section">
+              <h1><i class="fas fa-exchange-alt"></i> Transition vs Animation</h1>
+              <ul>
+                <li><strong>Transition:</strong> Property changes triggered by state changes</li>
+                <li><strong>Animation:</strong> Runs automatically with @keyframes, can loop</li>
+                <li>Transitions are simpler and require less code for basic effects</li>
+                <li>Animations offer more control with multiple keyframes and iterations</li>
+                <li>Use transitions for simple state changes, animations for complex sequences</li>
+              </ul>
+              <div class="code-container">
+                <div class="code-header">
+                  <span>CSS Code</span>
+                  <i class="far fa-copy"></i>
+                </div>
+                <pre><code>/* Transition Example */
+.box1 {
+  background: #ff9e6d;
+  transition: background 1s;
+}
+.box1:hover { 
+  background: #f72585; 
+}
+
+/* Animation Example */
+@keyframes colorChange {
+  from { background: #ff9e6d; }
+  to { background: #f72585; }
+}
+.box2 {
+  animation: colorChange 2s infinite alternate;
+}</code></pre>
+              </div>
+            </div>
+            <div class="example-section">
+              <div class="example-box">
+                <div class="box1"></div>
+                <div class="box2" style="margin-top: 20px;"></div>
+              </div>
+              <p class="example-caption">Left: Hover transition | Right: Automatic animation</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+      <button class="nav-btn prev-btn">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="progress-container">
+        <div class="progress-bar"></div>
+      </div>
+      <button class="nav-btn next-btn">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const slidesContainer = document.querySelector('.slides-container');
+      const slides = document.querySelectorAll('.slide');
+      const prevBtn = document.querySelector('.prev-btn');
+      const nextBtn = document.querySelector('.next-btn');
+      const progressBar = document.querySelector('.progress-bar');
+      const fullscreenBtn = document.getElementById('fullscreen-btn');
+      
+      let currentSlide = 0;
+      const totalSlides = slides.length;
+      
+      // Update slide position
+      function updateSlide() {
+        slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+        
+        // Update button states
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === totalSlides - 1;
+      }
+      
+      // Next slide
+      nextBtn.addEventListener('click', function() {
+        if (currentSlide < totalSlides - 1) {
+          currentSlide++;
+          updateSlide();
+        }
+      });
+      
+      // Previous slide
+      prevBtn.addEventListener('click', function() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateSlide();
+        }
+      });
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+          if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateSlide();
+          }
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+          if (currentSlide > 0) {
+            currentSlide--;
+            updateSlide();
+          }
+        } else if (e.key === 'Home') {
+          currentSlide = 0;
+          updateSlide();
+        } else if (e.key === 'End') {
+          currentSlide = totalSlides - 1;
+          updateSlide();
+        }
+      });
+      
+      // Fullscreen functionality
+      fullscreenBtn.addEventListener('click', function() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(err => {
+            console.log(`Error attempting to enable fullscreen: ${err.message}`);
+          });
+          fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+          }
+        }
+      });
+      
+      // Update fullscreen button when exiting fullscreen via other means
+      document.addEventListener('fullscreenchange', function() {
+        if (!document.fullscreenElement) {
+          fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+        }
+      });
+      
+      // Initialize
+      updateSlide();
+    });
+  </script>
+</body>
+</html>
